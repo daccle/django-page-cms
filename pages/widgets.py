@@ -5,7 +5,7 @@ in the admin via a placeholder tag in your template."""
 from pages.settings import PAGES_MEDIA_URL, PAGE_TAGGING
 from pages.settings import PAGE_TINYMCE, PAGE_LANGUAGES
 from pages.models import Page
-from pages.widgets_registry import register_widget
+from pages.widgets_registry import register_widget, WidgetAlreadyRegistered
 
 from django.conf import settings
 from django.forms import TextInput, Textarea, HiddenInput
@@ -19,7 +19,11 @@ from django.utils.translation import ugettext as _
 
 from os.path import join
 
-register_widget(TextInput)
+#TODO I will for now catch the WidgetAlreadyRegistered. Will have to track down the underlying error someday
+try:
+    register_widget(TextInput)
+except WidgetAlreadyRegistered:
+    pass
 register_widget(Textarea)
 register_widget(AdminTextInputWidget)
 register_widget(AdminTextareaWidget)
