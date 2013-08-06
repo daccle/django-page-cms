@@ -146,8 +146,13 @@ class Details(object):
             lang = get_language_from_request(request)
 
         # Raise a 404 if the language is not in not in the list
+        #if lang not in [key for (key, value) in settings.PAGE_LANGUAGES]:
+        #    raise Http404
+
+        # language should be "en" if not in list
         if lang not in [key for (key, value) in settings.PAGE_LANGUAGES]:
-            raise Http404
+            lang = 'en'
+
 
         # We're going to serve CMS pages in language lang;
         # make django gettext use that language too
