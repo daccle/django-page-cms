@@ -152,7 +152,7 @@ class Details(object):
         # language should be "en" if not in list
         if lang not in [key for (key, value) in settings.PAGE_LANGUAGES]:
             lang = 'en'
-
+            # DEBUG default to "en" raise Http404
 
         # We're going to serve CMS pages in language lang;
         # make django gettext use that language too
